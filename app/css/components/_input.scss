@@ -1,0 +1,39 @@
+.field {
+    
+    font-size: 1rem;
+    position: relative;
+    padding-top: 1.125rem;
+    height: 2.5rem;
+
+    input,
+    select,
+    textarea {
+        border: none;
+        border-bottom: 1px solid color("blue");
+        color: font-color("blue"); 
+        outline: none;
+        width: 100%;
+        padding: 0 2px 2px;
+
+        & + label,
+        .tooltip {
+            padding-left:2px;
+        }
+
+        & + label {
+            position: absolute;
+            width: 100%;
+            top: 1.2rem;
+            font-size: .875rem;
+        }
+
+        &:focus + label {
+            top: 0;
+            font-size: .75rem;
+        }
+    }
+
+    .tooltip {
+        font-size: .75rem;
+    }
+}
