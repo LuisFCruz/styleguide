@@ -1,23 +1,41 @@
 .field {
-    
+    box-sizing: border-box;
     font-size: 1rem;
     position: relative;
     padding-top: 1.125rem;
-    height: 2.5rem;
+    height: 3.75rem;
+    
+    .tooltip,
+    .tooltip-error {
+        padding-left:2px;
+        font-size: .75rem;
+        margin-top: 4px;
+        display: none;
+    }
 
-    input,
+    .tooltip-error {
+        color: color("red");
+    }
+
+    input:not([type=hidden]):not([type=file]),
     select,
     textarea {
         border: none;
-        border-bottom: 1px solid color("blue");
+        border-bottom: 1px solid color("default", "0");
+        box-sizing: border-box;
         color: font-color("blue"); 
         outline: none;
         width: 100%;
         padding: 0 2px 2px;
 
-        & + label,
-        .tooltip {
-            padding-left:2px;
+        &:disabled,
+        &[readonly] {
+            background: transparent;
+            border-bottom: 1px dashed color("grey", "600");
+            &,
+            & + label {
+                color: color("grey", "600");
+            }
         }
 
         & + label {
@@ -25,15 +43,38 @@
             width: 100%;
             top: 1.2rem;
             font-size: .875rem;
+            padding-left:2px;
+            transition: all .2s ease-in-out;
         }
 
-        &:focus + label {
+        &:focus {
+            border-color: color("blue");
+        } 
+
+        &:focus + label,
+        &.valid + label {
             top: 0;
             font-size: .75rem;
         }
-    }
 
-    .tooltip {
-        font-size: .75rem;
+        &:focus ~ .tooltip {
+            display: block;
+        }
+
+        &.invalid {
+            border-color: color("red");
+
+            & + label {
+                color: color("red");
+            }
+
+            & ~ .tooltip {
+                display: none;
+            }
+
+            & ~ .tooltip-error {
+                display: block;
+            }
+        }
     }
 }

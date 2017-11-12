@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,115 @@
     <link rel="stylesheet" href="../css/main.css">
     <title>Styleguide</title>
 </head>
+
 <body>
     <section>
         <h1>Fields (Inputs)</h1>
 
-        <h2>Field Text</h2>
-        <div class="field" style="width: 300px">
-            <input type="text" name="exp1" id="exp1">
-            <label for="exp1">Field Text</label>
-            <span class="tooltip"> Lorem ipsum dolor sit amet </span>
+        <div style="float:left; width: 50%; padding-right: 10px;">
+            <h2>Field Text</h2>
+            <div class="field">
+                <input type="text" name="field1" id="field1">
+                <label for="field1">Field Text</label>
+                <span class="tooltip">Lorem ipsum dolor sit amet </span>
+            </div>
+        </div>
+
+        <div style="float:left; width: 50%; padding-left: 10px;">
+            <h2>Field Text Error</h2>
+            <div class="field">
+                <input type="text" name="field2" id="field2" class="invalid">
+                <label for="field2">Field Text</label>
+                <span class="tooltip">Lorem ipsum dolor sit amet </span>
+                <span class="tooltip-error">Lorem ipsum dolor sit amet </span>
+            </div>
+        </div>
+
+        <div style="float:left; width: 50%; padding-right: 10px;">
+            <h2>Field Text with value</h2>
+            <div class="field">
+                <input type="text" name="field3" value="Any" id="field3" class="valid">
+                <label for="field3">Field Text</label>
+                <span class="tooltip">Lorem ipsum dolor sit amet </span>
+            </div>
+        </div>
+
+        <div style="float:left; width: 50%; padding-left: 10px;">
+            <h2>Field text disabled</h2>
+            <div class="field">
+                <input type="text" name="field4" id="field4" disabled>
+                <label for="field4">Field Text</label>
+                <span class="tooltip">Lorem ipsum dolor sit amet </span>
+            </div>
+        </div>
+
+        <div style="float:left; width: 50%; padding-right: 10px;">
+            <h2>Field Select</h2>
+            <div class="field">
+                <select name="field5" value="Any" id="field5" class="valid">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                </select>
+                <label for="field5">Field Select</label>
+                <span class="tooltip">Lorem ipsum dolor sit amet </span>
+            </div>
+        </div>
+
+        <div style="float:left; width: 50%; padding-left: 10px;">
+            <h2>Field Textarea</h2>
+            <div class="field">
+                <textarea type="text" name="field6" id="field6"></textarea>
+                <label for="field6">Field Text</label>
+                <span class="tooltip">Lorem ipsum dolor sit amet </span>
+            </div>
+        </div>
+
+        <div style="float: left; width: 100%">
+            <h2>Javascript</h2>
+            <code>
+                <pre>
+                    var fields = document.querySelectorAll(".field input, .field select, .field textarea");
+                    
+                    fields.forEach(function (field) {
+                        field.addEventListener("change", function (event) {
+                            if (this.value) {
+                                this.classList.add("valid");
+                                this.classList.remove("invalid");
+                                let tooltipError = this.parentNode.querySelector('.tooltip-error');
+                                if (tooltipError) this.parentNode.removeChild(tooltipError);
+                            } 
+                            else this.classList.remove("valid");
+                        });
+                    }); 
+                </pre>
+            </code>
         </div>
     </section>
+    <script>
+        var fields = document.querySelectorAll(".field input, .field select, .field textarea");
+
+        fields.forEach(function (field) {
+            field.addEventListener("change", function (event) {
+                if (this.value) {
+                    this.classList.add("valid");
+                    this.classList.remove("invalid");
+                    let tooltipError = this.parentNode.querySelector('.tooltip-error');
+                    if (tooltipError) this.parentNode.removeChild(tooltipError);
+                }
+                else this.classList.remove("valid");
+            });
+
+            if (field.nodeName == "TEXTAREA")
+                field.addEventListener("keyup", function (event) {
+                    this.style.height = "21px";
+                    if (this.scrollHeight + 1 > this.offsetHeight) {
+                        this.style.height = this.scrollHeight + 1 + "px";
+                    }
+                });
+        });
+
+    </script>
 </body>
+
 </html>

@@ -1,38 +1,94 @@
 * {
   font-family: Arial; }
 
+div {
+  box-sizing: border-box; }
+
+textarea {
+  height: 21px;
+  resize: none; }
+
 .field {
+  box-sizing: border-box;
   font-size: 1rem;
   position: relative;
   padding-top: 1.125rem;
-  height: 2.5rem; }
-  .field input,
+  height: 3.75rem; }
+  .field .tooltip,
+  .field .tooltip-error {
+    padding-left: 2px;
+    font-size: .75rem;
+    margin-top: 4px;
+    display: none; }
+  .field .tooltip-error {
+    color: #f44336; }
+  .field input:not([type=hidden]):not([type=file]),
   .field select,
   .field textarea {
     border: none;
-    border-bottom: 1px solid #2196f3;
+    border-bottom: 1px solid #000000;
+    box-sizing: border-box;
     color: #000000;
     outline: none;
     width: 100%;
     padding: 0 2px 2px; }
-    .field input + label,
-    .field input .tooltip,
-    .field select + label,
-    .field select .tooltip,
-    .field textarea + label,
-    .field textarea .tooltip {
-      padding-left: 2px; }
-    .field input + label,
+    .field input:not([type=hidden]):not([type=file]):disabled, .field input:not([type=hidden]):not([type=file])[readonly],
+    .field select:disabled,
+    .field select[readonly],
+    .field textarea:disabled,
+    .field textarea[readonly] {
+      background: transparent;
+      border-bottom: 1px dashed #757575; }
+      .field input:not([type=hidden]):not([type=file]):disabled,
+      .field input:not([type=hidden]):not([type=file]):disabled + label, .field input:not([type=hidden]):not([type=file])[readonly],
+      .field input:not([type=hidden]):not([type=file])[readonly] + label,
+      .field select:disabled,
+      .field select:disabled + label,
+      .field select[readonly],
+      .field select[readonly] + label,
+      .field textarea:disabled,
+      .field textarea:disabled + label,
+      .field textarea[readonly],
+      .field textarea[readonly] + label {
+        color: #757575; }
+    .field input:not([type=hidden]):not([type=file]) + label,
     .field select + label,
     .field textarea + label {
       position: absolute;
       width: 100%;
       top: 1.2rem;
-      font-size: .875rem; }
-    .field input:focus + label,
+      font-size: .875rem;
+      padding-left: 2px;
+      transition: all .2s ease-in-out; }
+    .field input:not([type=hidden]):not([type=file]):focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #2196f3; }
+    .field input:not([type=hidden]):not([type=file]):focus + label,
+    .field input:not([type=hidden]):not([type=file]).valid + label,
     .field select:focus + label,
-    .field textarea:focus + label {
+    .field select.valid + label,
+    .field textarea:focus + label,
+    .field textarea.valid + label {
       top: 0;
       font-size: .75rem; }
-  .field .tooltip {
-    font-size: .75rem; }
+    .field input:not([type=hidden]):not([type=file]):focus ~ .tooltip,
+    .field select:focus ~ .tooltip,
+    .field textarea:focus ~ .tooltip {
+      display: block; }
+    .field input:not([type=hidden]):not([type=file]).invalid,
+    .field select.invalid,
+    .field textarea.invalid {
+      border-color: #f44336; }
+      .field input:not([type=hidden]):not([type=file]).invalid + label,
+      .field select.invalid + label,
+      .field textarea.invalid + label {
+        color: #f44336; }
+      .field input:not([type=hidden]):not([type=file]).invalid ~ .tooltip,
+      .field select.invalid ~ .tooltip,
+      .field textarea.invalid ~ .tooltip {
+        display: none; }
+      .field input:not([type=hidden]):not([type=file]).invalid ~ .tooltip-error,
+      .field select.invalid ~ .tooltip-error,
+      .field textarea.invalid ~ .tooltip-error {
+        display: block; }
